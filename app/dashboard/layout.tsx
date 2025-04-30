@@ -1,5 +1,3 @@
-import { MainNav } from "../components/main-nav"
-import { UserNav } from "../components/user-nav"
 
 export default function DashboardLayout({
   children,

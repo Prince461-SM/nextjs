@@ -92,6 +92,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { MainNav } from "./components/main-nav";
 import { UserNav } from "./components/user-nav";
 import { usePathname } from "next/navigation"; // Import usePathname to check current route
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -118,7 +119,9 @@ export default function RootLayout({
                 <div className="flex h-full flex-col">
                   <div className="border-b p-4">
                     {/* <h2 className="text-lg font-semibold">HR Portal</h2> */}
-                    <img src="/images/logo.png" alt="HR Portal Logo" className="h-10 w-auto"  />
+                    {/* <image src="/images/logo.png" alt="HR Portal Logo" className="h-10 w-auto"  /> */}
+                            <Image  src="/images/logo.png"  alt="HR Portal Logo"  width={120}  height={40}  priority  />
+
                   </div>
                   <div className="flex-1 p-4">
                     <MainNav />

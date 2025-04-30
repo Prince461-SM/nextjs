@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button"
 import { LeaveRequestDetails } from "./leave-request-details"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import Loader from "../Loader/loader"
-
+import { LeaveRequest } from "../types/LeaveRequest "
 
 
 export function LeaveRequestList() {

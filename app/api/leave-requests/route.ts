@@ -1,3 +1,4 @@
+import { LeaveRequest } from "@/app/types/LeaveRequest "
 import { NextResponse } from "next/server"
 
 // Define the LeaveRequest type

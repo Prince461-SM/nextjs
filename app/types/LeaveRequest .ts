@@ -1,4 +1,4 @@
-interface LeaveRequest {
+export interface LeaveRequest {
     id: number;
     employee: string;
     type: string;

@@ -70,7 +70,8 @@ const DraggableNode = ({ employee, moveNode }: { employee: Employee; moveNode: (
   })
 
   return (
-    <div ref={(node) => drag(drop(node))} className={`relative cursor-pointer ${isDragging ? "opacity-50" : "opacity-100"}`}>
+    // <div ref={(node) => drag(drop(node))} className={`relative cursor-pointer ${isDragging ? "opacity-50" : "opacity-100"}`}>
+      <div  ref={(node) => { if (node) drag(drop(node));  }}  className={`relative cursor-pointer ${isDragging ? "opacity-50" : "opacity-100"}`}>
       <Card className="h-full bg-white border shadow-sm">
         <div className="flex items-center gap-2 p-2">
           <Avatar className="h-8 w-8">
@@ -88,18 +89,28 @@ const DraggableNode = ({ employee, moveNode }: { employee: Employee; moveNode: (
 }
 
 export default function OrganizationPage() {
-  const [activeTab, setActiveTab] = useState("employee")
+  // const [setActiveTab] = useState("employee")
+  
   const [employees, setEmployees] = useState(initialEmployees)
 
-  const findNode = (node: Employee, id: string): Employee | null => {
+  // const findNode = (node: Employee, id: string): Employee | null => {
+  //   if (node.id === id) return node
+  //   if (!node.children) return null
+  //   for (const child of node.children) {
+  //     const found = findNode(child, id)
+  //     if (found) return found
+  //   }
+  //   return null
+  // }
+  const findNode = useCallback((node: Employee, id: string): Employee | null => {
     if (node.id === id) return node
     if (!node.children) return null
-    for (let child of node.children) {
+    for (const child of node.children) {
       const found = findNode(child, id)
       if (found) return found
     }
     return null
-  }
+  }, [])
 
   const moveNode = useCallback((dragId: string, dropId: string) => {
     setEmployees((prevEmployees) => {
@@ -123,7 +134,7 @@ export default function OrganizationPage() {
 
       return clonedEmployees
     })
-  }, [])
+  }, [findNode])
 
   const renderTree = useCallback((node: Employee) => {
     return (
@@ -141,7 +152,7 @@ export default function OrganizationPage() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="container mx-auto py-6">
-        <Tabs defaultValue="employee" className="w-full " onValueChange={setActiveTab}>
+        <Tabs defaultValue="employee" className="w-full "  >
           <TabsList className="mb-4 active-tab">
             <TabsTrigger value="employee">Employee Tree</TabsTrigger>
             <TabsTrigger value="department">Department Tree</TabsTrigger>

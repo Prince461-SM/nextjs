@@ -40,7 +40,8 @@ export function DraggableNode({ id, name, role, avatar, index, path, moveNode }:
   })
 
   return (
-    <div ref={(node) => drag(drop(node))} style={{ opacity: isDragging ? 0.5 : 1 }}>
+    // <div ref={(node) => drag(drop(node))} style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <div  ref={(node) => {    if (node) drag(drop(node));  }}  style={{ opacity: isDragging ? 0.5 : 1 }}>
       <Card className={`bg-white border shadow-sm ${isOver ? "border-primary" : ""}`}>
         <div className="flex items-center gap-2 p-2">
           <Avatar className="h-8 w-8">

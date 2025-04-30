@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { useToast } from "@/components/ui/use-toast"
 
 export default function ProfilePage() {
-  const router = useRouter()
+
   const { toast } = useToast()
   const [isEditing, setIsEditing] = useState(false)
   const [userData, setUserData] = useState({

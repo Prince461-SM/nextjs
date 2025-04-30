@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Users, Clock, Calendar, FileCheck,Cake,UserPlus  } from "lucide-react"
+import { Users,  Calendar, Cake,UserPlus  } from "lucide-react"
 import Link from "next/link"
 export default function DashboardPage() {
   return (
