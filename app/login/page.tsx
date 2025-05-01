@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/ui/icons"
-import { useToast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 
 const loginSchema = z.object({
   email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
@@ -28,7 +28,7 @@ type LoginFormValues = z.infer<typeof loginSchema>
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
-  const { toast } = useToast()
+ 
 
   const {
     register,
@@ -43,6 +43,7 @@ export default function LoginPage() {
   }, [errors])
 
   const onSubmit = async (data: LoginFormValues) => {
+    debugger
     console.log("Form submitted with data:", data)
     setIsLoading(true)
 
@@ -51,29 +52,26 @@ export default function LoginPage() {
       await new Promise((resolve) => setTimeout(resolve, 2000))      
       if (data.email === "prince@gmail.com" && data.password === "password123") {
         console.log("Login successful")
-        toast({
-          title: "Login Successful",
-          description: "Welcome back!",
-        })
+        toast.success("Login successful! Welcome back.")
         router.push("/dashboard")
       } else {
-        console.log("Invalid credentials")
-        throw new Error("Invalid credentials")
+        debugger
+        console.log("Invalid credentials")        
+        toast.error("Invalid email or password. Please try again.")
+        //throw new Error("Invalid credentials")
       }
     } catch (error) {
       console.error("Login error:", error)
-      toast({
-        title: "Login Failed",
-        description: "Invalid email or password. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("An unexpected error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
+    
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      
       <Card className="w-[350px]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Sign in</CardTitle>
@@ -119,6 +117,7 @@ export default function LoginPage() {
               {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
               Sign In
             </Button>
+            
             <p className="mt-2 text-xs text-center text-gray-700">
               <Link href="/forgot-password" className="underline hover:text-blue-600">
                 Forgot password?

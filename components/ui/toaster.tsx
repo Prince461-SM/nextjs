@@ -18,8 +18,10 @@ export function Toaster() {
           <ToastClose />
         </Toast>
       ))}
-      <ToastViewport />
+      <ToastViewport  className="fixed bottom-0 right-0 z-[9999] m-4" />
     </ToastProvider>
   )
 }
+
+export { ToastProvider }
 
